@@ -14,6 +14,7 @@ function ajuda() {
         "AJUDA<br>-----------------------------------",
         "imprimir(valor);<br><span class='ajuda'>Imprime no console o valor especificado.</span>",
         "limpar();<br><span class='ajuda'>Limpa a área de desenho.</span>",
+        "eixos();<br><span class='ajuda'>Mostra os eixos x e y.</span>",
         "largura();<br><span class='ajuda'>Obtém a largura área de desenho.</span>",
         "altura();<br><span class='ajuda'>Obtém a altura área de desenho.</span>",
         "mover(x, y);<br><span class='ajuda'>Posiciona o lapís na posição x,y</span>",

@@ -1,6 +1,6 @@
 var canvas, stage, stageHud, stageGrid, grid;
 var drawingCanvas, gridCanvas;
-var  gridMc, drawingMc;
+var  gridMc, drawingMc, penMc;
 
 //var oldPt;
 //var oldMidPt;
@@ -23,6 +23,8 @@ var Ler = {
     valor: "",
     entrada: lerPara
 }
+
+var desenhoIniciado = false;
 
 
 $(document).ready(onDocumentReady);
@@ -54,6 +56,7 @@ function init() {
 
     gridMc = new createjs.MovieClip();
     drawingMc = new createjs.MovieClip();
+    penMc = new createjs.MovieClip();
 
     gridCanvas = new createjs.Shape();
     drawingCanvas = new createjs.Shape();
@@ -74,7 +77,7 @@ function init() {
 
     pen.on("mousedown", function (evt) {
         this.offset = {x: this.x - evt.stageX, y: this.y - evt.stageY};
-        moveTo(this.x, this.y);
+        moveTo(mouseX() - (largura()/2) + this.offset.x, -mouseY() + (altura()/2) - this.offset.y);
     });
 
     pen.on("mouseup", function (evt) {
@@ -84,9 +87,11 @@ function init() {
     pen.on("pressmove", function (evt) {
         this.x = evt.stageX + this.offset.x;
         this.y = evt.stageY + this.offset.y;
-        lineTo(this.x, this.y);
+        lineTo(mouseX() - (largura()/2) + this.offset.x, -mouseY() + (altura()/2) - this.offset.y);
     });
 
+    stageHud.addChild(penMc);
+    penMc.addChild(pen);
     pen.addChild(penBmp);
     stageHud.addChild(pen);
     stage.update();
@@ -99,10 +104,30 @@ function init() {
     setTimeout(updateEditorSize, 100);
 }
 
+function eixos() {
+    mover( -largura() / 2, 0 );
+    desenhar ( largura() / 2, 0, "#3e6d51" );
+    mover( 0, -altura() / 2 );
+    desenhar ( 0, altura() / 2 , "#3e6d51");
+}
+
 function onTick(event) {
     stageGrid.update(event);
     stageHud.update(event);
     stage.update(event);
+
+    if (!desenhoIniciado) {
+        drawingMc.x = largura() / 2;
+        drawingMc.y = altura() / 2;
+        penMc.x = largura() / 2;
+        penMc.y = altura() / 2;
+        drawingMc.scaleY = -1;
+        //penMc.scaleY = -1;
+        eixos();
+        if (largura() > 20) {
+            desenhoIniciado = true;
+        }
+    }
 }
 
 function transpile() {
@@ -116,8 +141,8 @@ function transpile() {
 
 function movePen(x, y) {
 
-    pen.x = x;
-    pen.y = y;
+    pen.x = x + ( largura() / 2 );
+    pen.y = -y + ( altura() / 2 );
 
     //var bounds = pen.getBounds();
     //console.log(bounds);
@@ -190,8 +215,8 @@ function onDocumentReady() {
 
     $("#board")[0].addEventListener("mousemove", function() {
         $('#info').text(
-            "[ Mouse(x,y): (" + Math.round(stage.mouseX) + ", " + Math.round(stage.mouseY) +
-            " ), Lápis(x,y): (" + Math.round(pen.x) + ", " + Math.round(pen.y) + ") ]"
+            "[ Mouse(x,y): (" + Math.round(stage.mouseX - (largura()/2)) + ", " + -Math.round(stage.mouseY - (altura()/2)) +
+            " ), Lápis(x,y): (" + Math.round(pen.x - (largura()/2)) + ", " + -Math.round(pen.y - (altura()/2)) + ") ]"
         );
     });
 
@@ -227,16 +252,16 @@ function onDocumentReady() {
         localStorage.setItem('codigo', editor.getValue());
     });
     if (!localStorage.getItem('codigo')) {
-        localStorage.setItem('codigo', `limpar();
-
+        localStorage.setItem('codigo', `ajuda();`);
+    }
+/*
+limpar();
 // use moveTo(x, y) para definir o inicio do desenho
 moveTo(200, 100);
 // use lineTo(x, y) para traçar a linhar a partir do moveTo ou do lineTo anterior
 lineTo(200, 200);
 lineTo(300, 200);
-`);
-    }
-
+* */
     var doc = editor.getDoc();
     doc.setValue(localStorage.getItem('codigo'));
 
