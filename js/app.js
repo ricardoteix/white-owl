@@ -1,7 +1,7 @@
 var canvas, stage, stageHud, stageGrid, grid;
 var drawingCanvas, gridCanvas;
 var  gridMc, drawingMc, penMc;
-
+var lapisDesenha = true;
 //var oldPt;
 //var oldMidPt;
 var editor
@@ -225,6 +225,8 @@ function onSelectFile(e) {
     };
     reader.readAsText(fileInput);
 
+    $('#reload').show();
+
     /*
     clearInterval(valFile);
     valFile = setInterval(
@@ -241,6 +243,26 @@ function onSelectFile(e) {
     */
 }
 
+function onSave() {
+    var filename = "codigo.js"
+    var data = editor.getValue();
+    var file = new Blob([data], {type: 'js'});
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function() {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+    }
+}
+
 function onLoadFile(contents) {
     var doc = editor.getDoc();
     doc.setValue(contents);
@@ -250,12 +272,20 @@ function onLoadFile(contents) {
 function onDocumentReady() {
     init();
 
+    $('#reload').hide();
+
     var file = document.getElementById('file-input');
     file.addEventListener('change', onSelectFile, false);
 
     shortcut.add("Ctrl+1",
         function() {
             onDraw();
+        }
+    );
+
+    shortcut.add("Ctrl+L",
+        function() {
+            alert(1);
         }
     );
 

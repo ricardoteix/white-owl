@@ -19,7 +19,7 @@ function ajuda() {
         "altura();<br><span class='ajuda'>Obtém a altura área de desenho.</span>",
         "mover(x, y);<br><span class='ajuda'>Posiciona o lapís na posição x,y</span>",
         "desenhar(x, y, cor);<br><span class='ajuda'>Desenha uma linha reta com a cor especificada da posição atual do lápis até a posição x,y. Caso a cor não seja definida PRETO sera escolhida.</span>",
-        "Constantes de cor:<br><span class='ajuda'>PRETO, BRANO, AZUL, VERMELHO, VERDE, AMARELO, CIANO e  ROSA.</span>",
+        "Constantes de cor:<br><span class='ajuda'>PRETO, BRANCO, AZUL, VERMELHO, VERDE, AMARELO, CIANO e  ROSA.</span>",
         "retangulo(x, y, largura, altura, cor);<br><span class='ajuda'>Desenha um retângulo com a cor especificada na posição x,y com a largura e altura especificadas. Caso a cor não seja definida PRETO sera escolhida.</span>",
         "circulo(cx, cy, raio, cor);<br><span class='ajuda'>Desenha um círculo com a cor especificada com centro na posição cx,cy e raio especificado.</span>",
         "-----------------------------------"

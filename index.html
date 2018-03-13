@@ -43,8 +43,9 @@
     </div>-->
     <header>
         <button onclick="onDraw()">Executar Código ( Ctrl + 1 )</button>
-        <button onclick="reloadFile()">O</button>
-        <input type="file" id="file-input" />
+        <button onclick="onSave()">Salvar</button>
+        <button id="reload" onclick="reloadFile()" alt="Recarregar e Executar">O</button>
+        <input type="file" id="file-input" alt="Abrir um arquivo JavaScript (*.js)" />
         <span id="info"></span>
         <!--<button onclick="onToggleGrid()">#</button>-->
         <button class="btn-console" id="toggleConsole" onclick="onToggleConsole()">Ocultar Console</button>
