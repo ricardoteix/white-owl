@@ -203,9 +203,55 @@ function updateCanvasSize() {
 
     setTimeout(onDraw, 100);
 }
+function reloadFile() {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        var contents = e.target.result;
+        onLoadFile(contents);
+    };
+    reader.readAsText(fileInput);
+    onDraw();
+}
+var fileInput;
+function onSelectFile(e) {
+    fileInput = e.target.files[0];
+    if (!fileInput) {
+        return;
+    }
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        var contents = e.target.result;
+        onLoadFile(contents);
+    };
+    reader.readAsText(fileInput);
+
+    /*
+    clearInterval(valFile);
+    valFile = setInterval(
+        function () {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var contents = e.target.result;
+                onLoadFile(contents);
+            };
+            reader.readAsText(fileInput);
+        },
+        100
+    );
+    */
+}
+
+function onLoadFile(contents) {
+    var doc = editor.getDoc();
+    doc.setValue(contents);
+    onDraw();
+}
 
 function onDocumentReady() {
     init();
+
+    var file = document.getElementById('file-input');
+    file.addEventListener('change', onSelectFile, false);
 
     shortcut.add("Ctrl+1",
         function() {
