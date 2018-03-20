@@ -244,9 +244,9 @@ function onSelectFile(e) {
 }
 
 function onSave() {
-    var filename = "codigo.js"
+    var filename = "codigo.txt"
     var data = editor.getValue();
-    var file = new Blob([data], {type: 'js'});
+    var file = new Blob([data], {type: 'txt'});
     if (window.navigator.msSaveOrOpenBlob) // IE10+
         window.navigator.msSaveOrOpenBlob(file, filename);
     else { // Others
@@ -285,7 +285,7 @@ function onDocumentReady() {
 
     shortcut.add("Ctrl+L",
         function() {
-            alert(1);
+
         }
     );
 
@@ -322,11 +322,24 @@ function onDocumentReady() {
     editor = CodeMirror.fromTextArea(code, {
         lineNumbers : true,
         mode:  "javascript",
-        viewportMargin: 20
+
+        gutters: ["CodeMirror-linenumbers", "breakpoints"]
     });
     editor.on("change", function() {
         localStorage.setItem('codigo', editor.getValue());
     });
+    editor.on("gutterClick", function(cm, n) {
+        var info = cm.lineInfo(n);
+        cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
+    });
+
+    function makeMarker() {
+        var marker = document.createElement("div");
+        marker.style.color = "#822";
+        marker.innerHTML = "●";
+        marker.class = "break";
+        return marker;
+    }
     if (!localStorage.getItem('codigo')) {
         localStorage.setItem('codigo', `ajuda();`);
     }
@@ -563,7 +576,8 @@ function lerPara() {
     smalltalk.prompt("Novo valor", "").then(
         (value) => {
         Ler.valor = value;
-    }).catch((err) => {
+}).catch((err) => {
         Ler.valor = "";
-    });
+});
+
 }
