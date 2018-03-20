@@ -508,7 +508,12 @@ function onDraw() {
     var position = $("#canvas").offset();
     $("#hud").css({ top: position.top, left: position.left });
     //mostrarGrade(20, "#00A000");
-    eval ( transpile() );
+    try {
+        eval ( transpile() );
+    } catch (err) {
+        alert("Código Inválido");
+    }
+
 
 }
 
