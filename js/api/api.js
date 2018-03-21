@@ -20,6 +20,9 @@ function ajuda() {
         "largura();<br><span class='ajuda'>Obtém a largura área de desenho.</span>",
         "altura();<br><span class='ajuda'>Obtém a altura área de desenho.</span>",
 
+        "iniciarLoop(funcao, intervalo);<br><span class='ajuda'>Inicia a execução da função a cada intervalo de tempo especificado.</span>",
+        "pararLoop();<br><span class='ajuda'>Para a execução de um loop iniciado por iniciarLoop.</span>",
+
         "lerAno();<br><span class='ajuda'>Retorna o ano atual.</span>",
         "lerMes();<br><span class='ajuda'>Retorna o mês atual iniciando em 0 para Janeiro, 1 para Fevereiro e assim por diante.</span>",
         "lerDia();<br><span class='ajuda'>Retorna o dia da semana iniciando em 0 para domingo, 1 para sefunda e assim por diante.</span>",
