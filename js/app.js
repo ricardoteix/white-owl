@@ -434,6 +434,8 @@ function limpar() {
     //drawingCanvas.graphics.clear();
     stage.update();
     //print("clear");
+
+    eixos();
 }
 
 function createText(text, x, y, tFont, tColor) {
@@ -578,11 +580,11 @@ function imprimir(value) {
 }
 
 function lerPara() {
-    smalltalk.prompt("Novo valor", "").then(
+ /*   smalltalk.prompt("Novo valor", "").then(
         (value) => {
         Ler.valor = value;
 }).catch((err) => {
         Ler.valor = "";
 });
-
+*/
 }
