@@ -428,14 +428,16 @@ function handleMouseMove(event) {
     stage.update();
 }
 
-function limpar() {
+function limpar(mostrarEixos = true) {
 
     stage.clear();
     //drawingCanvas.graphics.clear();
     stage.update();
     //print("clear");
 
-    eixos();
+    if (!mostrarEixos) {
+        eixos();
+    }
 }
 
 function createText(text, x, y, tFont, tColor) {

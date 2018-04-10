@@ -97,12 +97,34 @@ function lerSegundos() {
 }
 
 function ler(titulo = "Digite um valor") {
-    return prompt(titulo);
+    var entrada = prompt(titulo);
+    if (!isNaN(Number(entrada))) {
+        return Number(entrada);
+    }
+    return entrada
 }
 
 function limparConsole() {
     var c = $('#console-text')
     c.text("");
+}
+
+function criarItemMenu(item) {
+    if (item['id'] != undefined && item['texto'] != undefined && item['acao'] != undefined) {
+        var onClickItem = function () {
+            item['acao']();
+        }
+        imprimir(`<a id="${item.id}" href="#">${item.texto}</a>`);
+        $("#" + item.id).on ('click', item.acao);
+    } else {
+        imprimir("# Erro ao criar ItemMenu");
+    }
+}
+
+function criarMenu(itens) {
+    for (var i = 0; i < itens.length; i++) {
+        criarItemMenu (itens[i]);
+    }
 }
 
 /*
