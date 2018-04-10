@@ -114,7 +114,7 @@ function criarItemMenu(item) {
         var onClickItem = function () {
             item['acao']();
         }
-        imprimir(`<a id="${item.id}" href="#">${item.texto}</a>`);
+        imprimir(`<li><a id="${item.id}" href="#" style="color: white;">${item.texto}</a><li>`);
         $("#" + item.id).on ('click', item.acao);
     } else {
         imprimir("# Erro ao criar ItemMenu");
