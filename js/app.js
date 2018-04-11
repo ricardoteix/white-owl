@@ -514,8 +514,16 @@ function onDraw() {
     //mostrarGrade(20, "#00A000");
     try {
         eval ( transpile() );
-    } catch (err) {
-        alert("Código Inválido");
+    } catch (erro) {
+        var err = erro.constructor('Error in Evaled Script: ' + erro.message);
+        // +3 because `err` has the line number of the `eval` line plus two.
+        err.lineNumber = erro.lineNumber - err.lineNumber + 3;
+
+        if (!isNaN(erro.lineNumber)) {
+            alert("Código Inválido. Verifique a linha " + erro.lineNumber);
+        } else {
+            alert("Código Inválido");
+        }
     }
 
 
@@ -590,3 +598,15 @@ function lerPara() {
 });
 */
 }
+
+/*
+function listar() {
+    var cp = require('child_process');
+    cp.execFile('node', [__dirname + '\\code.js'],
+        function(error, stdout, stderr){
+            console.log(error);
+            console.log(stdout);
+            console.log(stderr);
+        }
+    );
+}*/

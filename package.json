@@ -19,6 +19,7 @@
     "electron": "~1.7.8"
   },
   "dependencies": {
+    "child_process": "^1.0.2",
     "split.js": "^1.3.5"
   }
 }
