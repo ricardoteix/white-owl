@@ -19,6 +19,7 @@ var pen;
 var showConsole = true;
 var hud;
 var idInterval;
+var execOnInit = false;
 var Ler = {
     valor: "",
     entrada: lerPara
@@ -30,6 +31,15 @@ var desenhoIniciado = false;
 $(document).ready(onDocumentReady);
 
 function init() {
+
+    /*$('#exec').change(
+        function() {
+            execOnInit = $("#exec").is(":checked");
+            localStorage.setItem('exec', execOnInit);
+        }
+    );*/
+
+    execOnInit = Boolean( localStorage.getItem('exec') );
 
     grid = document.getElementById("grid");
     hud = document.getElementById("hud");
@@ -201,7 +211,7 @@ function updateCanvasSize() {
     ctx.canvas.height = board.height() - 20;
 
 
-    setTimeout(onDraw, 100);
+    //setTimeout(onDraw, 100);
 }
 function reloadFile() {
     var reader = new FileReader();
