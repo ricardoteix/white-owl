@@ -13,9 +13,10 @@ var idLoop;
 function ajuda() {
     const info = [
         "AJUDA<br>-----------------------------------",
-        "imprimir(valor);<br><span class='ajuda'>Imprime no console o valor especificado.</span>",
+        "imprimir(valor);<br><span class='ajuda'>Imprime no console o valor especificado. Utilize \\n para quebrar linha.</span>",
         "ler();<br><span class='ajuda'>Abre uma janela para entrada de algum valor e retorna a entrada caso o usuário click OK.</span>",
         "limpar();<br><span class='ajuda'>Limpa a área de desenho.</span>",
+        "limparConsole();<br><span class='ajuda'>Limpa a área do console.</span>",
         "eixos();<br><span class='ajuda'>Mostra os eixos x e y.</span>",
         "largura();<br><span class='ajuda'>Obtém a largura área de desenho.</span>",
         "altura();<br><span class='ajuda'>Obtém a altura área de desenho.</span>",
@@ -36,6 +37,7 @@ function ajuda() {
         "desenhar(x, y, cor);<br><span class='ajuda'>Desenha uma linha reta com a cor especificada da posição atual do lápis até a posição x,y. Caso a cor não seja definida PRETO sera escolhida.</span>",
         "retangulo(x, y, largura, altura, cor);<br><span class='ajuda'>Desenha um retângulo com a cor especificada na posição x,y com a largura e altura especificadas. Caso a cor não seja definida PRETO sera escolhida.</span>",
         "circulo(x, y, raio, cor);<br><span class='ajuda'>Desenha um círculo com a cor especificada com centro na posição x,y e raio especificado.</span>",
+        "texto(valor, x, y);<br><span class='ajuda'>Escreve o texto da variável 'valor' na posição x,y</span>",
         "-----------------------------------"
     ].join("<br><br>");
     imprimir(info);

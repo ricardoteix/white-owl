@@ -1,6 +1,6 @@
 var canvas, stage, stageHud, stageGrid, grid;
 var drawingCanvas, gridCanvas;
-var  gridMc, drawingMc, penMc;
+var  gridMc, drawingMc, penMc, drawingTxt;
 var lapisDesenha = true;
 //var oldPt;
 //var oldMidPt;
@@ -66,6 +66,7 @@ function init() {
 
     gridMc = new createjs.MovieClip();
     drawingMc = new createjs.MovieClip();
+    drawingTxt = new createjs.MovieClip();
     penMc = new createjs.MovieClip();
 
     gridCanvas = new createjs.Shape();
@@ -76,6 +77,7 @@ function init() {
 
     stageGrid.addChild(gridCanvas);
     stage.addChild(drawingMc);
+    stage.addChild(drawingTxt);
 
     pen = new createjs.MovieClip( {loop:-1, labels: {start: 0 } } );
     var penBmp = new createjs.Bitmap("assets/pen.png");
@@ -132,6 +134,10 @@ function onTick(event) {
         penMc.x = largura() / 2;
         penMc.y = altura() / 2;
         drawingMc.scaleY = -1;
+
+        drawingTxt.x = drawingMc.x;
+        drawingTxt.y = drawingMc.y;
+        drawingTxt.scaleY = -1;
         //penMc.scaleY = -1;
         eixos();
         if (largura() > 20) {
@@ -440,28 +446,39 @@ function handleMouseMove(event) {
 
 function limpar(mostrarEixos = true) {
 
-    stage.clear();
-    //drawingCanvas.graphics.clear();
-    stage.update();
-    //print("clear");
+    var clearAll = function () {
 
-    if (!mostrarEixos) {
-        eixos();
+        stage.clear();
+        stage.removeChild(drawingTxt);
+
+        drawingTxt = new createjs.MovieClip();
+        drawingTxt.x = drawingMc.x;
+        drawingTxt.y = drawingMc.y;
+        drawingTxt.scaleY = -1;
+        stage.addChild(drawingTxt);
+
+        if (mostrarEixos) {
+            eixos();
+        }
+
+        stage.update();
     }
+    clearAll();
 }
 
-function createText(text, x, y, tFont, tColor) {
+function texto(text, x, y, tFont, tColor) {
     if (!tFont) {
-        tFont = "36px Arial";
+        tFont = "14px Verdana";
     }
     if (!tColor) {
-        tColor = "#777777";
+        tColor = "#000000";
     }
 
     var text = new createjs.Text(text, tFont, tColor);
     text.x = x;
     text.y = y;
-    stage.addChild(text);
+    text.scaleY = -1;
+    drawingTxt.addChild(text);
     stage.update();
 
     return text;
@@ -585,6 +602,10 @@ function onClearConsole() {
 }
 
 function imprimir(value) {
+    if (typeof(value) != "string") {
+        value = value.toString();
+    }
+
     if (showConsole) {
         //var c = $(".console");
         //c.append(value + "\n");
