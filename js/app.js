@@ -601,6 +601,10 @@ function onClearConsole() {
     c.text("");
 }
 
+function onLimpar() {
+    limpar();
+}
+
 function imprimir(value) {
     if (typeof(value) != "string") {
         value = value.toString();
